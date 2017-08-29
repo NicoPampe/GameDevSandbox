@@ -27,12 +27,17 @@ public class MouseMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print (axes == RotationAxes.MouseX);
 		if (axes == RotationAxes.MouseX) {
 			// This never seems to be true...
-			// transform.Rotate (0, sensitivityHor, 0);
+			transform.Rotate (0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
 		} else if (axes == RotationAxes.MosueY) {
 			// This never seems to be true...
+			_rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
+			_rotationX = Mathf.Clamp(_rotationX, minVert, maxVert);
+
+			float rotationY = transform.localEulerAngles.y;
+
+			transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
 		} else {
 			_rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
 			_rotationX = Mathf.Clamp(_rotationX, minVert, maxVert);
