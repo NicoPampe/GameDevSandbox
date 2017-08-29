@@ -2,12 +2,16 @@
 using System.Collections;
 
 public class PlayerBehavior : MonoBehaviour {
+	// Movement Parameters 
 	public float walkingSpeed = 3.0f;
 	public float gravity = -9.8f; // Gravity in Games needs to be tweaked to 'look' more natural
 	public float jumpSpeed = 15.0f;
 	public float terminalVel = -10.0f;
 	public float minFall = -1.5f;
-	
+
+	// World Interaction Parameters
+	public float obstacleRange = 5.0f;
+
 	private CharacterController _charController;
 	private float _vertSpeed;
 

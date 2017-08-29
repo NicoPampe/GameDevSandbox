@@ -200,6 +200,7 @@ MonoBehaviour:
   jumpSpeed: 15
   terminalVel: -10
   minFall: -1.5
+  obstacleRange: 5
 --- !u!1 &590251214
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +214,7 @@ GameObject:
   - 92: {fileID: 590251216}
   - 81: {fileID: 590251215}
   - 114: {fileID: 590251220}
+  - 114: {fileID: 590251221}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -302,6 +304,17 @@ MonoBehaviour:
   sensitivityVert: 9
   minVert: -45
   maxVert: 45
+--- !u!114 &590251221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590251214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529acf98ea5170e4e82c9bb0e8f27d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &602254277
 GameObject:
   m_ObjectHideFlags: 0
