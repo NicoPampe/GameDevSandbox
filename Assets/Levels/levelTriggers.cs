@@ -10,6 +10,7 @@ public class levelTriggers : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c) {
 		if (trigType == TriggerType.Start) {
+			Debug.Log(gameObject.transform.position);
 			gameObject.GetComponentInParent<levelBehavior> ().StartLevel (c);
 		} else if (trigType == TriggerType.End) {
 			gameObject.GetComponentInParent<levelBehavior> ().EndLevel(c);
