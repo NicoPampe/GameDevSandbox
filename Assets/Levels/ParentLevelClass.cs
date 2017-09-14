@@ -2,11 +2,31 @@
 using System.Collections;
 
 public class ParentLevelClass : MonoBehaviour {
-	public float playerSpeed = 1.0f;	
+	public float playerSpeed = 1.0f;
+	public float levelDistance;
 
 	private GameObject _player;
 	private PlayerBehavior _playerBehavior;
 	private bool runningLevel = false;
+
+	//************ INITIALIZATION **************//
+	// This sets up how long the level is 
+	void levelSetUp() {
+		if (levelDistance < 20.0f) {
+			levelDistance = 20.0f;
+		}
+		
+//		GameObject floor = gameObject.transform.FindChild ("Floor");
+//		gameObject.
+
+		Transform floor = gameObject.transform.FindChild ("Floor");
+		floor.localScale += new Vector3 (0, 0, levelDistance);
+		floor.Translate (0, 0, (levelDistance / 2.0f) - 1);
+
+		Transform endTrigger = gameObject.transform.FindChild ("World/EndTrigger");
+		endTrigger.localScale += new Vector3 (10.0f, 4.0f, 0);
+		endTrigger.Translate (0, 0, (levelDistance - 2));
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -17,17 +37,25 @@ public class ParentLevelClass : MonoBehaviour {
 			playerSpeed = 1.0f;
 		}
 		playerSpeed *= _playerBehavior.walkingSpeed / 50.0f;
+
+		levelSetUp ();
 	}
 	
-	public void StartLevel (Collider collider) {
-		runningLevel = true;
-	}
-
+	//************ CONTINUOUS **************//
 	// Update is called once per frame
 	void Update () {
 		if (runningLevel) {
 			// TODO: use the player movement rather than just transforming their pos
 			_player.transform.Translate(new Vector3(0, 0, playerSpeed), gameObject.transform);
 		}
+	}
+
+	public void StartLevel (Collider collider) {
+		runningLevel = true;
+	}
+
+	public void EndLevel (Collider collider) {
+		runningLevel = false;
+		_player.transform.position = new Vector3 (0, 0, 0);
 	}
 }
