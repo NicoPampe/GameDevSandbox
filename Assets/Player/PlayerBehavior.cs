@@ -23,11 +23,15 @@ public class PlayerBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		_charController.Move (Movement ());
+	}
+
+	Vector3 Movement() {
 		float deltaX = Input.GetAxis ("Horizontal") * walkingSpeed;
 		float deltaZ = Input.GetAxis ("Vertical") * walkingSpeed;
 		Vector3 movement = new Vector3 (deltaX, 0, deltaZ);
 		movement = Vector3.ClampMagnitude (movement, walkingSpeed);
-
+		
 		if (_charController.isGrounded) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				_vertSpeed = jumpSpeed;
@@ -39,9 +43,9 @@ public class PlayerBehavior : MonoBehaviour {
 			_vertSpeed = Mathf.Clamp(_vertSpeed, terminalVel, Mathf.Infinity);
 		}
 		movement.y = _vertSpeed;
-
+		
 		movement *= Time.deltaTime; // Needed for differnt computer settings
 		movement = transform.TransformDirection (movement);
-		_charController.Move (movement);
+		return movement;
 	}
 }

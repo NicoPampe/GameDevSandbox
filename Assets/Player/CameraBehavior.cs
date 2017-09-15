@@ -10,6 +10,29 @@ public class CameraBehavior : MonoBehaviour {
 	void Start () {
 		_camera = GetComponent<Camera> ();
 	}
+
+	void Update() {
+		if (Input.GetMouseButtonDown (0)) {
+			RayShooter();
+		}
+	}
+
+	// World interaction Raycasting
+	void RayShooter() {
+		Vector3 middlePoint = new Vector3 (_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0);
+		Ray ray = _camera.ScreenPointToRay (middlePoint);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit)) {
+			GameObject hitObject = hit.transform.gameObject;
+			Renderer hitObjRend = hitObject.GetComponent<Renderer>();
+//			Material hitObjMaterial = hitObject.GetComponent<Material>();
+			Debug.Log("hit " + hitObject.name);
+			Debug.Log(hitObjRend.material.color);
+//			Debug.Log("color: " + hitObjMaterial.GetColor("_Color"));
+//			hitObjMaterial.SetColor("
+			hitObjRend.material.color = Color.cyan;
+		};
+	}
 	
 	// Apply requested cursor state
 	void SetCursorState()
