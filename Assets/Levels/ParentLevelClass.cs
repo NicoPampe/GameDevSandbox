@@ -16,15 +16,15 @@ public class ParentLevelClass : MonoBehaviour {
 			levelDistance = 20.0f;
 		}
 
-		Transform floor = gameObject.transform.FindChild ("Floor");
+		Transform floor = gameObject.transform.Find ("Floor");
 		floor.localScale += new Vector3 (0, 0, levelDistance);
 		floor.Translate (0, 0, (levelDistance / 2.0f) - 1);
 
-		Transform walls = gameObject.transform.FindChild ("Walls");
+		Transform walls = gameObject.transform.Find ("Walls");
 		walls.localScale += new Vector3 (0, 0, levelDistance);
 		walls.Translate (0, 0, (levelDistance / 2.0f) - 1);
 
-		Transform endTrigger = gameObject.transform.FindChild ("World/EndTrigger");
+		Transform endTrigger = gameObject.transform.Find ("World/EndTrigger");
 		endTrigger.localScale += new Vector3 (5.0f, 4.0f, 0);
 		endTrigger.Translate (0, 0, (levelDistance - 2));
 	}
