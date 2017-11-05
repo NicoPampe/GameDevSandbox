@@ -6,8 +6,12 @@ public class ParentLevelClass : MonoBehaviour {
 	public float levelDistance;
 
 	private GameObject _player;
-	private PlayerBehavior _playerBehavior;
 	private bool runningLevel = false;
+	private PlayerBehavior _playerBehavior;
+
+	// Prefabs
+	[SerializeField] private GameObject endWallPrefab;
+	private GameObject _backWall;
 
 	//************ INITIALIZATION **************//
 	// This sets up how long the level is 
@@ -16,17 +20,25 @@ public class ParentLevelClass : MonoBehaviour {
 			levelDistance = 20.0f;
 		}
 
+//		_backWall = Instantiate (endWallPrefab) as GameObject;
+//		_backWall.transform.parent = transform;
+//		_backWall.transform.localPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2 + (levelDistance / 2.0f));
+			
 		Transform floor = gameObject.transform.Find ("Floor");
-		floor.localScale += new Vector3 (0, 0, levelDistance);
-		floor.Translate (0, 0, (levelDistance / 2.0f) - 1);
+		floor.localScale += new Vector3 (0, 0, levelDistance + 4);
+		floor.Translate (0, 0, ((levelDistance + 4) / 2.0f) - 1);
 
 		Transform walls = gameObject.transform.Find ("Walls");
 		walls.localScale += new Vector3 (0, 0, levelDistance);
 		walls.Translate (0, 0, (levelDistance / 2.0f) - 1);
 
+		Transform backWall = gameObject.transform.Find ("BackWall");
+		backWall.Translate (0, 0, levelDistance - 1);
+
 		Transform endTrigger = gameObject.transform.Find ("World/EndTrigger");
 		endTrigger.localScale += new Vector3 (5.0f, 4.0f, 0);
 		endTrigger.Translate (0, 0, (levelDistance - 2));
+
 	}
 
 	// Use this for initialization
